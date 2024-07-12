@@ -12,6 +12,9 @@
 
 let result;
 let men;
+let women;
+let acc;
+let jew;
  getproductslist()
 
 
@@ -23,14 +26,43 @@ async function getproductslist() {
   result=addcolourandsizetoresult(apiresultarr);
 console.log('this is result ', result)
 console.log('rop')
-const itemsContainer = document.querySelector('.items');   
+const itemsContainer = document.getElementById('itemm');  
+const itemsContainer3 = document.getElementById('iteme'); 
+const itemsContainer4 = document.getElementById('itemj');   
+
 
     men = result.filter((item) => item.category === "men's clothing");
         console.log('Filtered men\'s clothing', men);
 
+        women = result.filter((item) => item.category === "women's clothing");
+        console.log('Filtered men\'s clothing', women);
+
+        acc = result.filter((item) => item.category === "electronics");
+        console.log('Filtered men\'s clothing', acc);
+
+        jew = result.filter((item) => item.category === "jewelery");
+        console.log('Filtered men\'s clothing', jew);
+
 men.forEach(itemData => {
   const newItem = createItemElement(itemData);
   itemsContainer.appendChild(newItem);
+});
+
+
+const itemsContainerW = document.getElementById('itemw');  
+women.forEach(itemData => {
+  const newItem = createItemElement(itemData);
+  itemsContainerW.appendChild(newItem);
+});
+
+acc.forEach(itemData => {
+  const newItem = createItemElement(itemData);
+  itemsContainer3.appendChild(newItem);
+});
+
+jew.forEach(itemData => {
+  const newItem = createItemElement(itemData);
+  itemsContainer4.appendChild(newItem);
 });
 
      }
@@ -75,20 +107,23 @@ function createItemElement(data) {
   priceSizesDiv.classList.add('row');
   priceSizesDiv.innerHTML = `
     <div class="price">$${data.price}</div>
-    <div class="sizes">${data.size}</div>
+    <div class="sized">${data.size}</div>
   `;
   infoDiv.appendChild(priceSizesDiv);
 
   // Create colors element
   const colorsDiv = document.createElement('div');
   colorsDiv.classList.add('colors');
-  console.log(data.colors)
-  // colorsDiv.innerHTML = `
-  //   Colors:
-  //   <div class="row">
-  //     ${data.colors.map(color => `<div class="circle" style="background-color: ${color}"></div>`).join('')}
-  //   </div>
-  // `;
+  console.log(data.color)
+  colorsDiv.innerHTML = `
+   Colors:
+                  <div class="row">
+                    <div class="circle" style="background-color: #000"></div>
+                    <div class="circle" style="background-color: #4938af"></div>
+                    <div class="circle" style="background-color: #203d3e"></div>
+                  </div>
+            ${data.color}      
+  `;
   infoDiv.appendChild(colorsDiv);
 
   // Create rating element
