@@ -2,6 +2,16 @@
 
 // myCartProductArray = myProducts.filter((item)=> myCartIDs.includes(item.id))
 
+if(localStorage.getItem('accesstoken')) {
+  redirectfunc();
+}
+
+function redirectfunc(event) {   //Redirect function
+let a=document.createElement('a');
+a.href="./shop/index.html"
+a.click();
+}
+
 function singup(){
 
 //   e.preventDefault();
@@ -15,3 +25,6 @@ function singin(){
       console.log('woktin')
       window.location.href="login/index.html";
     }
+
+
+
