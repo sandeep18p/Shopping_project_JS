@@ -1,7 +1,131 @@
-/* Write styles here */
-*{
+/* Reset margin and padding, and set box-sizing */
+* {
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
 }
 
+/* Navbar container styling */
+.navbar {
+    background-color: black;
+    height: 4rem;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1rem;
+    align-items: center;
+    color: white;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+}
+
+/* Left navigation (logo/title) */
+.l-nav {
+    display: inline-block;
+}
+
+/* Right navigation (menu items) */
+.r-nav {
+    display: inline-block;
+}
+
+/* Unordered list styling */
+ul {
+    display: flex;
+    list-style: none;
+    gap: 25px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* List item styling */
+li > a {
+    text-decoration: none;
+    color: white;
+    opacity: 89%;
+    font-size: 1.1rem;
+    transition: opacity 0.3s, font-size 0.2s; 
+}
+
+/* Hover effect for list items */
+li > a:hover {
+    opacity: 100%;
+    font-size: 1.2rem;
+}
+
+/* Heading styling */
+h1 {
+    font-size: 20px;
+    margin: 5px 0;
+}
+
+/* Background image styling */
+.bg-img {
+    display: flex;
+    justify-content: end;
+}
+
+/* Page text paragraph styling */
+.page-text > p {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+/* Image styling */
+img {
+    height: 400px;
+}
+
+/* Page text heading styling */
+.page-text h1 {
+    font-size: 80px;
+    line-height: 95px;
+    font-weight: 400;
+}
+
+/* Page text container styling */
+.page-text {
+    margin-top: 30px;
+    margin-left: 30px;
+}
+
+/* Page text button styling */
+.page-text button {
+    width: 200px;
+    height: 50px;
+    font-size: 20px;
+    transition: background-color 0.3s, color 0.3s, border 0.3s; /* Add transition for smooth hover effect */
+}
+
+/* Main login button styling */
+.mainlg-btn {
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    margin-right: 20px;
+}
+
+/* Main sign-up button styling */
+.mainsgu-btn {
+    background-color: white;
+    color: black; /* Ensure text color is visible */
+    cursor: pointer;
+}
+
+/* Hover effect for buttons */
+.mainlg-btn:hover {
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+}
+
+.mainsgu-btn:hover {
+    background-color: black;
+    color: white;
+    border: 2px solid white;
+}
+
+/* Clicked button styling */
+.clicked {
+    border: 4px solid blue;
+}
