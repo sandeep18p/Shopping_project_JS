@@ -42,13 +42,16 @@ li > a {
     color: white;
     opacity: 89%;
     font-size: 1.1rem;
-    transition: opacity 0.3s, font-size 0.2s; 
+    display: inline-block; /* Ensure the link is treated as a block for scaling */
+    transition: opacity 0.3s, font-size 0.2s, transform 0.2s; 
 }
 
 /* Hover effect for list items */
 li > a:hover {
     opacity: 100%;
-    font-size: 1.2rem;
+    /* font-size: 1.2rem; */
+    /* position: ; */
+    transform: scale(1.2);
 }
 
 /* Heading styling */
@@ -60,6 +63,8 @@ h1 {
 .op{font-size: 3rem;}
 
 
+/* //Login Form */
+
 form {
     display: flex;
     flex-direction: column;
@@ -68,9 +73,7 @@ form {
     width: fit-content;
     row-gap: 20px;
 }
-.l-nav>h1{
-    font-size: 1.5rem;
-}
+
 form input {
     width: 90vw;
     max-width: 1400px;
@@ -86,9 +89,7 @@ input::placeholder {
     font-size: 18px;
 }
 
-
 form h1 {
-    font-size: 20px;
     font-weight: 400;
     font-size: 28px;
 }
@@ -103,16 +104,7 @@ form button {
     cursor: pointer;
 }
 
-.green {
-    color: green;
-}
-
-.red {
-    color: red;
-}
-
-
-#submitbtn{
+#submit-btn{
     background-color: black;
     color: whitesmoke;
     cursor: pointer;
@@ -121,3 +113,13 @@ form button {
     height: 50px;
     font-size: 20px;
 }
+
+.green {
+    color: green;
+}
+
+.red {
+    color: red;
+}
+
+.op{font-size: 3rem;}
