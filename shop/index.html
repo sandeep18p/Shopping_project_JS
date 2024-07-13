@@ -21,7 +21,8 @@
     </nav>
 
     <main>
-      <aside>
+      <aside id="sidebar" class="sidebar">
+        <div class="content-wrapper">
         <section>
           <title>Colors</title>
           <ul>
@@ -108,17 +109,19 @@
             </li>
           </ul>
         </section>
+        <button id="bt_o" >btn</button>
+      </div>
       </aside>
       <main-content>
         <input type="text" placeholder="Search" />
         <div class="filters">
-          <div class="filter active">All</div>
-          <div class="filter">Mens</div>
-          <div class="filter">Womens</div>
-          <div class="filter">Jewellery</div>
-          <div class="filter">Electronics</div>
+          <button id="all" class="filter active">All</button>
+          <button id="mens" class="filter">Mens</button>
+          <button id="womens" class="filter">Womens</button>
+          <button id="jewellery" class="filter">Jewellery</button>
+          <button id="electronics" class="filter">Electronics</button>
         </div>
-        <section>
+        <section id="men_section" class="items-container">
           <title>Men's Clothing</title>
           <div class="items" id="itemm">
 
@@ -146,7 +149,7 @@
           </div>
         </section>
 
-        <section>
+        <section id="women_section" class="items-container">
           <title>Women's Clothing</title>
           <div class="items" id="itemw">
             <!-- <div class="item">
@@ -247,7 +250,7 @@
           </div>
         </section>
 
-        <section>
+        <section id="electronics_section" class="items-container">
           <title>Electronics</title>
           <div class="items" id="iteme">
             <!-- <div class="item">
@@ -350,7 +353,7 @@
 
 
 
-        <section>
+        <section id="Jewellery_section" class="items-container">
           <title>Jewellery</title>
           <div class="items" id="itemj">
             <!-- <div class="item">
@@ -449,6 +452,10 @@
               <button id="addBtn">Add to Cart</button>
             </div> -->
           </div>
+        </section>
+        <section>
+          <div class="searchcontainer items" style="display: none;"></div>
+        </div>
         </section>
       </main-content>
     </main>

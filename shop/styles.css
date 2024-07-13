@@ -68,10 +68,27 @@ main aside {
   flex: 0.2;
   background-color: black;
   color: white;
-  height: 100vh;
-  position: fixed;
+  height: 150vh;
+  position: absolute;
   padding-top: 1rem;
-  width: 11rem;
+  overflow-x: auto;
+  width: 10.5rem;
+  padding-bottom: 20px;
+}
+
+#bt_o{
+  width: 99%;
+  margin-left: auto;
+  margin-right: auto;
+  height: 20%;
+  background-color: black;
+  border: 1px solid white;
+  color: white;
+}
+
+#bt_o:hover{
+  color: black;
+  background-color: whitesmoke;
 }
 
 main main-content {
@@ -145,7 +162,15 @@ main-content section title {
   font-size: 1.5rem;
 }
 
+.items::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Opera */
+}
+.items{
+  -ms-overflow-style: none;  /* For Internet Explorer and Edge */
+  scrollbar-width: none;
+}
 main-content .items {
+  width: 100vh;
   display: flex;
   width: auto;
   overflow-x: scroll;
@@ -153,14 +178,19 @@ main-content .items {
   gap: 1rem;
   flex-wrap: wrap;
   justify-content: start;
+  /* width: 100vw; */
 }
-
+/* .searchcontainer{
+  display: flex;
+  flex-wrap: wrap;
+} */
 main-content .items .item {
   border: 1px solid black;
   width: 20%;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  min-width: 270px
 }
 
 main-content .items .item img {
@@ -204,3 +234,7 @@ main-content .items .item .circle {
   margin: 0 5px;
 }
 
+.searchcontainer{
+  display: flex;
+
+}

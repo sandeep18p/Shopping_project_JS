@@ -10,6 +10,215 @@
 };
 
 
+//color chekboxes importing
+let redto=document.getElementById('red');
+let blueto =document.getElementById('blue');
+let greento=document.getElementById('green');
+let blackto=document.getElementById('black');
+let whiteto=document.getElementById('white');
+
+//size chekboxes importing
+let sto=document.getElementById('s');
+let mto =document.getElementById('m');
+let lto=document.getElementById('l');
+let xlto=document.getElementById('xl');
+
+//Filter Buttons fucntionality
+let ratinginput=document.getElementById('range');
+
+//price range chekboxes importing
+let zeroto=document.getElementById('0-25');
+let twentyfiveto =document.getElementById('25-50');
+let fiftyto=document.getElementById('50-100');
+let hundredto=document.getElementById('100on');
+
+let filterbutton=document.getElementById('bt_o');
+
+filterbutton.addEventListener('click',filterfunction1);
+
+function filterfunction1(event) {
+  try {
+let filteredarr=result.filter((element)=>{
+      let ratingval=ratinginput.value;
+          if(ratingelemboolean(ratingval,element) && elempricecheckingboolean(zeroto,twentyfiveto,fiftyto,hundredto,element)
+          && elemcolorcheckingboolean (redto,blueto,greento,blackto,whiteto,element) && elemsizecheckingboolean (sto,mto,lto,xlto,element) )
+      {
+          // console.log("ans",element);
+          return true;
+      } else {
+          // console.log('false',element)
+          return false;
+      }
+  });
+  console.log(filteredarr);
+  if(filteredarr.length===0)
+  {
+      alert('No Item matches with the filters');
+      console.log('exit');
+      document.getElementsByClassName('items-container')[0].style.display='block';
+      document.getElementsByClassName('searchcontainer')[0].style.display='none';
+      return;
+  }
+
+document.getElementsByClassName('searchcontainer')[0].innerHTML=''
+console.log('op')
+document.querySelectorAll('.filter').forEach(button => {
+  button.classList.remove('active');
+});
+allbtn.classList.add('category-selected');
+searchaddcardstoui(filteredarr);
+console.log("reached121")
+  }catch(error) {console.log(error)}
+}
+
+function ratingelemboolean (ratingval,currelement){
+  try {
+ let ratingnum=parseInt(ratingval);
+ if(currelement.rating.rate>=ratingnum)
+ {
+  // console.log('truerating',ratingnum,currelement.rating.rate)
+  return true;
+ }
+ else {
+  // console.log('falserating',ratingnum,currelement.rating.rate)
+  return false;
+ }
+}catch(error) {console.log(error)}
+}
+
+//Price check of the element in range or not
+function elempricecheckingboolean (zeroto,twentyfiveto,fiftyto,hundredto,currelement) {
+  try {
+let zerotoval=zeroto.checked;
+let twentyfivetoval=twentyfiveto.checked;
+let fiftytoval=fiftyto.checked;
+let hundredtoval=hundredto.checked;
+let validation='pending'
+
+if(!zerotoval && !twentyfivetoval && !fiftytoval && !hundredtoval)
+{
+  return true;
+}
+
+if(zerotoval){ if(currelement.price>=0 && currelement.price<=25) {validation=true;return true;} else{} }
+if(twentyfivetoval){ if(currelement.price>=25 && currelement.price<=50) {validation=true;return true} else{} }
+if(fiftytoval){ if(currelement.price>=50 && currelement.price<=100) {validation=true;return true} else{} }
+if(hundredtoval){ if(currelement.price>=100) {validation=true;return true} else{} }
+
+if(validation='pending')
+{
+  return false;
+}
+}catch(error) {console.log(error)}
+}
+
+function elemsizecheckingboolean (sto,mto,lto,xlto,currelement) {
+  try {
+  let stoval=sto.checked;
+  let mtoval=mto.checked;
+  let ltoval=lto.checked;
+  let xltoval=xlto.checked;
+  let validation='pending';
+
+  if(!stoval && !mtoval && !ltoval && !xltoval)
+  {
+      return true;
+  }
+  if(stoval){ if(currelement.size==='S') {validation=true;return true}  else{}} ;
+  if(mtoval){ if(currelement.size==='M') {validation=true;return true} else{} }
+  if(ltoval){ if(currelement.size==='L') {validation=true;return true} else{} }
+  if(xltoval){ if(currelement.size==='XL') {validation=true;return true} else{} }
+
+  if(validation=='pending')
+  {
+    return false;
+  }
+
+}catch(error) {console.log(error)}
+}
+
+
+//Colors check of the element 
+function elemcolorcheckingboolean (redto,blueto,greento,blackto,whiteto,currelement) {
+  try {
+  let redtoval=redto.checked;
+  let bluetoval=blueto.checked;
+  let greentoval=greento.checked;
+  let blacktoval=blackto.checked;
+  let whitetoval=whiteto.checked;
+  let validation='pending'
+  if (!redtoval && !bluetoval && !greentoval && !blacktoval && !whitetoval) {
+      // No color filters selected, so return true
+      return true;
+    }
+  // console.log(redtoval)
+
+  // if (redtoval && currelement.color === 'Red') {
+  //     return true;
+  //   }
+  //   if (bluetoval && currelement.color === 'Blue') {
+  //     return true;
+  //   }
+  //   if (greentoval && currelement.color === 'Green') {
+  //     return true;
+  //   }
+  //   if (blacktoval && currelement.color === 'Black') {
+  //     return true;
+  //   }
+  //   if (whitetoval && currelement.color === 'White') {
+  //     return true;
+  //   }
+
+  //   return false;
+
+//When multiple colours selected
+// let arr=[redtoval,bluetoval,greentoval,blacktoval,whitetoval];
+
+// let filteredarr=arr.filter((element)=>{if(!element){return false}else{return true}});
+
+//When single colour selected
+  if(redtoval){ if(currelement.color==='Red') {validation=true;return true;}  else{} }
+  if(bluetoval){ if(currelement.color==='Blue') {validation=true;return true;} else{} }
+  if(greentoval){ if(currelement.color==='Green') {validation=true;return true;} else{} }
+  if(blacktoval){ if(currelement.color==='Black') {validation=true;return true;} else{} }
+  if(whitetoval){ if(currelement.color==='White') {validation=true;return true;} else{} }
+
+  if(validation=='pending')
+  {
+    return false;
+  }
+
+}catch(error) {console.log(error)}
+}
+
+let sidebar = document.getElementsByClassName("sidebar")[0];
+let sidebar_content = document.getElementsByClassName("content-wrapper")[0];
+
+window.onscroll = () => {
+  
+  let scrollTop = window.scrollY; // current scroll position
+  let viewportHeight = window.innerHeight; //viewport height
+  let contentHeight = sidebar_content.getBoundingClientRect().height; // current content height
+  console.log(contentHeight+10)
+  contentHeight=contentHeight+20;
+  let sidebarTop = sidebar.getBoundingClientRect().top + window.pageYOffset; //distance from top to sidebar
+  
+  if(scrollTop >= contentHeight - viewportHeight + sidebarTop) {
+    sidebar_content.style.transform = `translateY(-${contentHeight - viewportHeight + sidebarTop}px)`;
+    sidebar_content.style.position = "fixed";
+    sidebar_content.style.backgroundColor = "black";
+    sidebar_content.style.paddingBottom = "10px"; 
+    sidebar_content.style.margingBottom = "0px"; 
+    
+  }
+  else {
+    sidebar_content.style.transform = "";
+    sidebar_content.style.position = "";
+  }
+
+}
+
+
 let result;
 let men;
 let women;
@@ -17,6 +226,25 @@ let acc;
 let jew;
  getproductslist()
 
+ let mensdiv=document.getElementById("men_section");
+ let womensdiv=document.getElementById("women_section");
+let jewelrydiv=document.getElementById("Jewellery_section");
+let electronicsdiv=document.getElementById("electronics_section");
+
+
+//Search Bar Below Buttons fucntionality
+
+let allbtn=document.getElementById('all');
+let mensbtn=document.getElementById('mens');
+let womensbtn=document.getElementById('womens');
+let jewelerybtn=document.getElementById('jewellery');
+let electronicsbtn=document.getElementById('electronics');
+
+allbtn.addEventListener('click',btnfucntionality);
+mensbtn.addEventListener('click',btnfucntionality);
+womensbtn.addEventListener('click',btnfucntionality);
+jewelerybtn.addEventListener('click',btnfucntionality);
+electronicsbtn.addEventListener('click',btnfucntionality);
 
 async function getproductslist() {
     try{
@@ -139,4 +367,84 @@ function createItemElement(data) {
   itemDiv.appendChild(button);
 
   return itemDiv;
+}
+
+
+function btnfucntionality (event) {
+  console.log('btn')
+  document.querySelectorAll('.filter').forEach(button => {
+    button.classList.remove('active');
+});
+event.target.classList.add('active');
+if(event.target.id==='all'){mensdiv.style.display="block";womensdiv.style.display="block";jewelrydiv.style.display="block";electronicsdiv.style.display="block"}
+else if(event.target.id==='mens') {mensdiv.style.display="block";womensdiv.style.display="none";jewelrydiv.style.display="none";electronicsdiv.style.display="none"}
+else if(event.target.id==='womens') {mensdiv.style.display="none";womensdiv.style.display="block";jewelrydiv.style.display="none";electronicsdiv.style.display="none"}
+else if(event.target.id==='jewellery') {mensdiv.style.display="none";womensdiv.style.display="none";jewelrydiv.style.display="block";electronicsdiv.style.display="none"}
+else if(event.target.id==='electronics') {mensdiv.style.display="none";womensdiv.style.display="none";jewelrydiv.style.display="none";electronicsdiv.style.display="block"}
+
+}
+
+
+function searchaddcardstoui(searchedarr) {
+  try {
+  // console.log(searchedarr[0].image);
+  for(let i=0;i<searchedarr.length;i++)
+  {
+      try{
+  let card=document.createElement('div');
+  card.className='card';
+  card.innerHTML = `
+  <div class="item">
+    <img src="${searchedarr[i].image}" alt="Item" style="width:250px;height:260px">
+    <div class="info">
+      <div class="row">
+        <div class="price">$${searchedarr[i].price}</div>
+        <div class="sized">${searchedarr[i].size}</div>
+      </div>
+      <div class="colors"> 
+        Colors:
+        <div class="row">
+          <div class="circle" style="background-color: blue"></div>
+          <div class="circle" style="background-color: green"></div>
+          <div class="circle" style="background-color: orange"></div>
+        </div>
+      </div>
+      <div class="row">Rating: ${ratingstring(searchedarr[i].rating.rate)}</div>
+    </div>
+    <button id="addBtn">Add to Cart</button>
+  </div>`;
+
+  let name1=searchedarr[i].category.split(' ')[0];
+  // console.log(name1);
+  document.querySelectorAll('.items-container').forEach(item => {
+    item.style.display = 'none';
+  });
+  let searchcontainer=document.getElementsByClassName('searchcontainer')[0];
+ 
+  searchcontainer.style.display='flex';
+  searchcontainer.style.justifyContent = 'center';
+
+  console.log('op')
+  searchcontainer.append(card);
+  let addcartbtn=card.querySelectorAll('button')[3];
+  // console.log(addcartbtn)
+  
+  addcartbtn.addEventListener('click',(event)=>{addcartfunctionality(event,card,i)});
+  // console.log(i);
+  }catch(error) {console.log(error);}
+  }
+}catch(error) {console.log(error)}
+}
+
+function ratingstring(rating) {
+  let string='';
+  for(let i=0;i<rating;i++)
+  {
+      string=string+'⭐';
+  }
+  if(rating%parseInt(rating)!==0)
+  {
+      string=string+'✰';
+  }
+  return string+' '+rating;
 }
