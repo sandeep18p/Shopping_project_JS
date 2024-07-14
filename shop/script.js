@@ -254,44 +254,47 @@ async function getproductslist() {
   result=addcolourandsizetoresult(apiresultarr);
 console.log('this is result ', result)
 console.log('rop')
-const itemsContainer = document.getElementById('itemm');  
-const itemsContainer3 = document.getElementById('iteme'); 
-const itemsContainer4 = document.getElementById('itemj');   
+// const itemsContainer = document.getElementById('itemm');  
+// const itemsContainer3 = document.getElementById('iteme'); 
+// const itemsContainer4 = document.getElementById('itemj');   
 
 
-    men = result.filter((item) => item.category === "men's clothing");
-        console.log('Filtered men\'s clothing', men);
+//     men = result.filter((item) => item.category === "men's clothing");
+//         console.log('Filtered men\'s clothing', men);
 
-        women = result.filter((item) => item.category === "women's clothing");
-        console.log('Filtered men\'s clothing', women);
+//         women = result.filter((item) => item.category === "women's clothing");
+//         console.log('Filtered men\'s clothing', women);
 
-        acc = result.filter((item) => item.category === "electronics");
-        console.log('Filtered men\'s clothing', acc);
+//         acc = result.filter((item) => item.category === "electronics");
+//         console.log('Filtered men\'s clothing', acc);
 
-        jew = result.filter((item) => item.category === "jewelery");
-        console.log('Filtered men\'s clothing', jew);
+//         jew = result.filter((item) => item.category === "jewelery");
+//         console.log('Filtered men\'s clothing', jew);
 
-men.forEach(itemData => {
-  const newItem = createItemElement(itemData);
-  itemsContainer.appendChild(newItem);
-});
+// men.forEach((itemData,i)=> {
+//   const newItem = createItemElement(itemData,i);
+//   itemsContainer.appendChild(newItem);
+// });
 
 
-const itemsContainerW = document.getElementById('itemw');  
-women.forEach(itemData => {
-  const newItem = createItemElement(itemData);
-  itemsContainerW.appendChild(newItem);
-});
+// const itemsContainerW = document.getElementById('itemw');  
+// women.forEach((itemData,i) => {
+//   const newItem = createItemElement(itemData,i);
+//   itemsContainerW.appendChild(newItem);
+// });
 
-acc.forEach(itemData => {
-  const newItem = createItemElement(itemData);
-  itemsContainer3.appendChild(newItem);
-});
+// acc.forEach((itemData,i) => {
+//   const newItem = createItemElement(itemData,i);
+//   itemsContainer3.appendChild(newItem);
+// });
 
-jew.forEach(itemData => {
-  const newItem = createItemElement(itemData);
-  itemsContainer4.appendChild(newItem);
-});
+// jew.forEach((itemData,i) => {
+//   console.log("jew ",i);
+//   const newItem = createItemElement(itemData,i);
+//   itemsContainer4.appendChild(newItem);
+// });
+
+createItemElement(result);
 
      }
     catch(error) {
@@ -318,55 +321,106 @@ function addcolourandsizetoresult (apiresultarr) {
 //
 function createItemElement(data) {
   // Create main elements
-  const itemDiv = document.createElement('div');
-  itemDiv.classList.add('item');
+  for(let i=0;i<data.length;i++){
+       
+    console.log(i)
+    const itemDiv = document.createElement('div');
+    itemDiv.classList.add('item');
+  
+    const img = document.createElement('img');
+    img.src = data[i].image;
+    img.alt = 'Item';
+    itemDiv.appendChild(img);
+  
+    const infoDiv = document.createElement('div');
+    infoDiv.classList.add('info');
+    itemDiv.appendChild(infoDiv);
+  
+    const title = document.createElement('div');
+    title.classList.add('title');
+    title.innerText =`${(data[i].title).substring(0,22)}`;
+  
+    infoDiv.appendChild(title)
+    
+  
+    // Create price and sizes elements
+    const priceSizesDiv = document.createElement('div');
+    priceSizesDiv.classList.add('row');
+    priceSizesDiv.innerHTML = `
+      <div class="price">$${data[i].price}</div>
+      <div class="sized">${data[i].size}</div>
+    `;
+    infoDiv.appendChild(priceSizesDiv);
+  
+  
+  
+    // Create colors element
+    const colorsDiv = document.createElement('div');
+    colorsDiv.classList.add('colors');
+    console.log(data[i].color)
+    colorsDiv.innerHTML = `
+     Colors:
+                    <div class="row">
+                      <div class="circle" style="background-color: #000"></div>
+                      <div class="circle" style="background-color: #4938af"></div>
+                      <div class="circle" style="background-color: #203d3e"></div>
+                    </div>
+              ${data[i].color}      
+    `;
+    infoDiv.appendChild(colorsDiv);
+  
+    // Create rating element
+    const ratingDiv = document.createElement('div');
+    ratingDiv.classList.add('row');
+    ratingDiv.textContent = `Rating: ${data[i].rating.rate}`;
+    infoDiv.appendChild(ratingDiv);
+  
+    // Create button element
+    const button = document.createElement('button');
+    button.id = 'addBtn';
+    button.textContent = 'Add to Cart';
+    button.addEventListener('click',(event,i)=>{addcartfunctionality(event,itemDiv,i)});
+    button.classList.add('addcart-btn')
+    itemDiv.appendChild(button);
+    // Create changeitems-div
+    const changeItemsDiv = document.createElement('div');
+    changeItemsDiv.classList.add('changeitems-div');
+    changeItemsDiv.style.display = 'none';
+  
+    const minusBtn = document.createElement('button');
+    minusBtn.classList.add('minusbtn');
+    minusBtn.style.display = 'inline';
+    minusBtn.style.padding = '0';
+    minusBtn.innerHTML = '➖';
+  
+    const itemCount = document.createElement('span');
+    itemCount.classList.add('itemcount');
+    itemCount.innerHTML = '1';
+  
+    const plusBtn = document.createElement('button');
+    plusBtn.classList.add('plusbtn');
+    plusBtn.style.display = 'inline';
+    plusBtn.style.padding = '0';
+    plusBtn.innerHTML = '➕';
+  
+    // Append the buttons and span to the changeItemsDiv
+    changeItemsDiv.appendChild(minusBtn);
+    changeItemsDiv.appendChild(itemCount);
+    changeItemsDiv.appendChild(plusBtn);
+  
+    // Append changeItemsDiv just after the button
+    itemDiv.appendChild(changeItemsDiv);
+    
+    let name1=data[i].category.split(' ')[0];
 
-  const img = document.createElement('img');
-  img.src = data.image;
-  img.alt = 'Item';
-  itemDiv.appendChild(img);
-
-  const infoDiv = document.createElement('div');
-  infoDiv.classList.add('info');
-  itemDiv.appendChild(infoDiv);
-
-  // Create price and sizes elements
-  const priceSizesDiv = document.createElement('div');
-  priceSizesDiv.classList.add('row');
-  priceSizesDiv.innerHTML = `
-    <div class="price">$${data.price}</div>
-    <div class="sized">${data.size}</div>
-  `;
-  infoDiv.appendChild(priceSizesDiv);
-
-  // Create colors element
-  const colorsDiv = document.createElement('div');
-  colorsDiv.classList.add('colors');
-  console.log(data.color)
-  colorsDiv.innerHTML = `
-   Colors:
-                  <div class="row">
-                    <div class="circle" style="background-color: #000"></div>
-                    <div class="circle" style="background-color: #4938af"></div>
-                    <div class="circle" style="background-color: #203d3e"></div>
-                  </div>
-            ${data.color}      
-  `;
-  infoDiv.appendChild(colorsDiv);
-
-  // Create rating element
-  const ratingDiv = document.createElement('div');
-  ratingDiv.classList.add('row');
-  ratingDiv.textContent = `Rating: ${data.rating.rate}`;
-  infoDiv.appendChild(ratingDiv);
-
-  // Create button element
-  const button = document.createElement('button');
-  button.id = 'addBtn';
-  button.textContent = 'Add to Cart';
-  itemDiv.appendChild(button);
-
-  return itemDiv;
+    console.log(name1)
+    document.getElementsByClassName(name1)[0].append(itemDiv); //code to render
+    // let addcartbtn=card.querySelectorAll('button')[3];
+    // console.log(addcartbtn)
+    
+    // addcartbtn.addEventListener('click',(event)=>{addcartfunctionality(event,card,i)});
+    
+  }
 }
 
 
@@ -397,6 +451,7 @@ function searchaddcardstoui(searchedarr) {
   <div class="item">
     <img src="${searchedarr[i].image}" alt="Item" style="width:250px;height:260px">
     <div class="info">
+     <div class='title'>${(searchedarr[i].title).substring(0,22)}</div>
       <div class="row">
         <div class="price">$${searchedarr[i].price}</div>
         <div class="sized">${searchedarr[i].size}</div>
@@ -411,7 +466,8 @@ function searchaddcardstoui(searchedarr) {
       </div>
       <div class="row">Rating: ${ratingstring(searchedarr[i].rating.rate)}</div>
     </div>
-    <button id="addBtn">Add to Cart</button>
+    <button id="addBtn" class="addcart-btn">Add to Cart</button>
+      <div style="display:none" class="changeitems-div">Items Added:<button class="minusbtn" style="display:inline;padding:0;">➖</button> <span class="itemcount">1</span> <button class="plusbtn" style="display:inline;padding:0;">➕</button> </div>
   </div>`;
 
   let name1=searchedarr[i].category.split(' ')[0];
@@ -426,7 +482,7 @@ function searchaddcardstoui(searchedarr) {
 
   console.log('op')
   searchcontainer.append(card);
-  let addcartbtn=card.querySelectorAll('button')[3];
+  let addcartbtn=card.querySelectorAll('button')[0];
   // console.log(addcartbtn)
   
   addcartbtn.addEventListener('click',(event)=>{addcartfunctionality(event,card,i)});
@@ -447,4 +503,116 @@ function ratingstring(rating) {
       string=string+'✰';
   }
   return string+' '+rating;
+}
+
+
+//Add to cart button fucntion
+
+function addcartfunctionality(event,currentcard,i) {
+  try{
+    // alert('Item added in cart')
+      console.log(event.target);
+      let k;
+  let addcartbtnlist=document.getElementsByClassName('addcart-btn');
+  let changeitemsdivlist=document.getElementsByClassName('changeitems-div');
+  for(let j=0;j<addcartbtnlist.length;j++)
+  {
+      if(event.target==addcartbtnlist[j])
+      {  
+          k=j;
+      }
+  }
+  let changeitemsdiv=changeitemsdivlist[k];
+   console.log("this is the ",changeitemsdiv)
+  event.target.style.display="none";
+ 
+  changeitemsdiv.style.display="flex"; //problem
+
+ 
+  let currelem=event.target;
+  let spanelem=document.getElementsByClassName('itemcount')[k];
+  spanelem.innerText=1;
+  let itemcount=parseInt(spanelem.innerText);
+  
+  cartitemstolocalstorage(currentcard,i);
+
+  let minusbtn=document.getElementsByClassName('minusbtn')[k];
+  let plusbtn=document.getElementsByClassName('plusbtn')[k];
+  
+ 
+  minusbtn.addEventListener('click',(event)=>{itemcount--;  //minusbutton fucntionality
+  if(itemcount<0) {return}
+  
+  if(itemcount==0) {
+    currelem.style.display="block";
+  changeitemsdiv.style.display="none";
+}
+
+ 
+  spanelem.innerText=itemcount;
+  cartitemstolocalstorage (currentcard,i);
+  })
+  
+  plusbtn.addEventListener('click',(event)=>{itemcount++;   //plusbutton fucntionality
+      if(itemcount==0)
+      {currelem.style.display="block";
+      changeitemsdiv.style.display="none";}
+      spanelem.innerText=itemcount;
+      cartitemstolocalstorage (currentcard,i); //problem with plus
+      })
+  } 
+  catch(error) {
+      console.log(error);
+  }
+  }
+
+
+  //Adding items to local storage for cart items list
+
+function cartitemstolocalstorage (currentcard,i) {
+  if(localStorage.getItem('cartelems'))
+ { 
+  console.log('box')
+  document.getElementsByClassName('cart-btn')[0].style.backgroundColor='skyblue'
+  document.getElementsByClassName('cart-btn')[0].classList.add('blink');  
+  let updated=0;
+  let cartelemsarr=JSON.parse(localStorage.getItem('cartelems'));
+  
+  for(let index=0;index<cartelemsarr.length;index++)
+  {
+      if(JSON.parse(cartelemsarr[index]).id===(i+1))
+      {  let id2=i+1;
+         let obj2={'id':id2,
+          'elem':JSON.stringify(currentcard.innerHTML),}
+          cartelemsarr[index]=JSON.stringify(obj2)
+          updated=1;
+          console.log('elem',currentcard.innerHTML)
+      }
+  }
+  if(updated===0){
+      let id1=i+1;
+       let obj1={'id':id1,
+            'elem':JSON.stringify(currentcard.innerHTML)};
+  cartelemsarr.push(JSON.stringify(obj1));
+  console.log('upd',currentcard.innerHTML)
+  console.log(currentcard);
+  }
+  localStorage.setItem('cartelems',JSON.stringify(cartelemsarr));
+}
+else {
+  let elemsarr=[];
+  // let strcard=JSON.stringify(currentcard);
+  let id=i+1;
+  let obj={'id':id,
+            'elem':JSON.stringify(currentcard.innerHTML)};
+  elemsarr.push(JSON.stringify(obj));
+  let elemsarrstr=JSON.stringify(elemsarr);
+  console.log(elemsarrstr,currentcard)
+  localStorage.setItem('cartelems',elemsarrstr);
+  console.log('ccoming')
+  document.getElementsByClassName('cart-btn')[0].style.backgroundColor='skyblue'
+  document.getElementsByClassName('cart-btn')[0].classList.add('blink');
+  document.getElementsByClassName('cart-btn')[0].style.padding='10px';
+  document.getElementsByClassName('cart-btn')[0].style.color='black';
+}
 }

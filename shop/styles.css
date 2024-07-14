@@ -180,6 +180,12 @@ main-content .items {
   justify-content: start;
   /* width: 100vw; */
 }
+
+.title{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
 /* .searchcontainer{
   display: flex;
   flex-wrap: wrap;
@@ -236,5 +242,5 @@ main-content .items .item .circle {
 
 .searchcontainer{
   display: flex;
-
+  justify-content: start;
 }
