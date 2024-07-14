@@ -1,4 +1,4 @@
- const produtc = {
+const produtc = {
   id: 1,
   title: "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
   price: 109.95,
@@ -323,98 +323,54 @@ function createItemElement(data) {
   // Create main elements
   for(let i=0;i<data.length;i++){
        
-    console.log(i)
-    const itemDiv = document.createElement('div');
-    itemDiv.classList.add('item');
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+    <div class="item">
+      <img src="${data[i].image}" alt="Item" style="width:250px;height:260px">
+      <div class="info">
+        <div class='title'>${(data[i].title).substring(0, 22)}</div>
+        <div class="row">
+          <div class="price">$${data[i].price}</div>
+          <div class="sized">${data[i].size}</div>
+        </div>
+        <div class="colors">
+          Colors:
+          <div class="row">
+            <div class="circle" style="background-color: blue"></div>
+            <div class="circle" style="background-color: green"></div>
+            <div class="circle" style="background-color: orange"></div>
+          </div>
+        </div>
+        <div class="row">Rating: ${ratingstring(data[i].rating.rate)}</div>
+      </div>
+      <button id="addBtn" class="addcart-btn">Add to Cart</button>
+      <div style="display:none" class="changeitems-div">
+        Items Added:<button class="minusbtn" style="display:inline;padding:0;">➖</button> 
+        <span class="itemcount">1</span> 
+        <button class="plusbtn" style="display:inline;padding:0;">➕</button> 
+      </div>
+    </div>`;
   
-    const img = document.createElement('img');
-    img.src = data[i].image;
-    img.alt = 'Item';
-    itemDiv.appendChild(img);
-  
-    const infoDiv = document.createElement('div');
-    infoDiv.classList.add('info');
-    itemDiv.appendChild(infoDiv);
-  
-    const title = document.createElement('div');
-    title.classList.add('title');
-    title.innerText =`${(data[i].title).substring(0,22)}`;
-  
-    infoDiv.appendChild(title)
-    
-  
-    // Create price and sizes elements
-    const priceSizesDiv = document.createElement('div');
-    priceSizesDiv.classList.add('row');
-    priceSizesDiv.innerHTML = `
-      <div class="price">$${data[i].price}</div>
-      <div class="sized">${data[i].size}</div>
-    `;
-    infoDiv.appendChild(priceSizesDiv);
-  
-  
-  
-    // Create colors element
-    const colorsDiv = document.createElement('div');
-    colorsDiv.classList.add('colors');
-    console.log(data[i].color)
-    colorsDiv.innerHTML = `
-     Colors:
-                    <div class="row">
-                      <div class="circle" style="background-color: #000"></div>
-                      <div class="circle" style="background-color: #4938af"></div>
-                      <div class="circle" style="background-color: #203d3e"></div>
-                    </div>
-              ${data[i].color}      
-    `;
-    infoDiv.appendChild(colorsDiv);
-  
-    // Create rating element
-    const ratingDiv = document.createElement('div');
-    ratingDiv.classList.add('row');
-    ratingDiv.textContent = `Rating: ${data[i].rating.rate}`;
-    infoDiv.appendChild(ratingDiv);
-  
-    // Create button element
-    const button = document.createElement('button');
-    button.id = 'addBtn';
-    button.textContent = 'Add to Cart';
-    button.addEventListener('click',(event,i)=>{addcartfunctionality(event,itemDiv,i)});
-    button.classList.add('addcart-btn')
-    itemDiv.appendChild(button);
-    // Create changeitems-div
-    const changeItemsDiv = document.createElement('div');
-    changeItemsDiv.classList.add('changeitems-div');
-    changeItemsDiv.style.display = 'none';
-  
-    const minusBtn = document.createElement('button');
-    minusBtn.classList.add('minusbtn');
-    minusBtn.style.display = 'inline';
-    minusBtn.style.padding = '0';
-    minusBtn.innerHTML = '➖';
-  
-    const itemCount = document.createElement('span');
-    itemCount.classList.add('itemcount');
-    itemCount.innerHTML = '1';
-  
-    const plusBtn = document.createElement('button');
-    plusBtn.classList.add('plusbtn');
-    plusBtn.style.display = 'inline';
-    plusBtn.style.padding = '0';
-    plusBtn.innerHTML = '➕';
-  
-    // Append the buttons and span to the changeItemsDiv
-    changeItemsDiv.appendChild(minusBtn);
-    changeItemsDiv.appendChild(itemCount);
-    changeItemsDiv.appendChild(plusBtn);
-  
-    // Append changeItemsDiv just after the button
-    itemDiv.appendChild(changeItemsDiv);
-    
-    let name1=data[i].category.split(' ')[0];
+    let name1 = data[i].category.split(' ')[0];
+    console.log('ji ha ',name1,  document.getElementsByClassName(name1)[0])
+    document.getElementsByClassName(name1)[0].append(card); 
+    // document.querySelectorAll('.items-container').forEach(item => {
+    //   item.style.display = 'none';
+    // });
 
-    console.log(name1)
-    document.getElementsByClassName(name1)[0].append(itemDiv); //code to render
+
+    // let searchcontainer = document.getElementsByClassName('searchcontainer')[0];
+    // console.log('ji ha 2',searchcontainer)
+    document.getElementsByClassName(name1)[0].style.display='flex';
+    // searchcontainer.style.display = 'flex';
+    // searchcontainer.style.justifyContent = 'center';
+  
+    // searchcontainer.append(card);
+    let addcartbtn = card.querySelectorAll('button')[0];
+
+    addcartbtn.addEventListener('click',(event)=>{addcartfunctionality(event,card,i)});
+     //code to render
     // let addcartbtn=card.querySelectorAll('button')[3];
     // console.log(addcartbtn)
     
@@ -472,6 +428,7 @@ function searchaddcardstoui(searchedarr) {
 
   let name1=searchedarr[i].category.split(' ')[0];
   // console.log(name1);
+  // document.getElementsByClassName(name1)[0].append(card); 
   document.querySelectorAll('.items-container').forEach(item => {
     item.style.display = 'none';
   });
@@ -480,7 +437,7 @@ function searchaddcardstoui(searchedarr) {
   searchcontainer.style.display='flex';
   searchcontainer.style.justifyContent = 'center';
 
-  console.log('op')
+ 
   searchcontainer.append(card);
   let addcartbtn=card.querySelectorAll('button')[0];
   // console.log(addcartbtn)
