@@ -397,7 +397,7 @@ else if(event.target.id==='electronics') {mensdiv.style.display="none";womensdiv
 
 function searchaddcardstoui(searchedarr) {
   try {
-  // console.log(searchedarr[0].image);
+  console.log('jol ',searchedarr[0].image);
   for(let i=0;i<searchedarr.length;i++)
   {
       try{
