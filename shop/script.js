@@ -593,3 +593,36 @@ const logout = function(event){
   a.href="../index.html"
   a.click();
 }
+
+
+  
+// Search functionality
+
+let searchinput=document.getElementById('searchip');
+console.log(searchinput)
+searchinput.addEventListener('keyup',searchfunction);
+
+
+function searchfunction(event) {
+  try{
+      console.log("entered")
+  let searchtext=event.target.value.toLowerCase();
+  if(searchtext.trim()==='')
+  {
+      console.log('exit');
+      document.getElementsByClassName('items-container')[0].style.display='block';
+      document.getElementsByClassName('searchcontainer')[0].style.display='none';
+      return;
+  }
+  console.log(searchtext);
+  console.log(result)
+  let searchedarr=result.filter((currelement)=>{
+      return currelement.title.toLowerCase().includes(searchtext);
+  });
+  document.getElementsByClassName('searchcontainer')[0].innerHTML=''
+  searchaddcardstoui(searchedarr);
+} catch(error) {
+  console.log(error);
+}
+
+}

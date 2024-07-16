@@ -157,4 +157,3 @@ Array.from(homepage).forEach((element)=>{element.addEventListener('click',(event
    });
    })
   
-  
