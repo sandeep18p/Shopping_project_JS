@@ -104,7 +104,7 @@ function errormessage(msg) {  //Error Messages Function
 
 function redirectfunc(event) {  //Page redirect function
     let a=document.createElement('a');
-    a.href="../login-page/index-login.html"
+    a.href="../login/index.html"
     a.click();
 }
 

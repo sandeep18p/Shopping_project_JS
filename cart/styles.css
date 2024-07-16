@@ -60,13 +60,17 @@
 
   .main{
     display:flex;
+    padding: 30px;
+    justify-content: space-between;
   }
 
   .cart{
     width: 300px;
     height: 600px;
     background-color: black;
-    
+    color: white;
+    display: flex;
+    flex-direction: column;
   }
 
   .item {
@@ -78,6 +82,7 @@
     min-width: 270px;
     border-radius: 5px;
     padding: 20px;
+  
   }
 
   .item img{
@@ -97,12 +102,133 @@
     flex-wrap: wrap;
     padding: 40px;
     gap: 30px;
+    float: left;
     margin-top: 60px;
   }
 
   .cart{
     min-width: 400px;
-    float: right;
+    
     color: white;
     height: auto;
+    background-color: black;
+    margin-top: 10px;
   }
+
+
+
+  .itemsummary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 3px solid orangered;
+    min-width: 350px;
+    max-width: 500px;
+    /* align-self: center; */
+    padding: 5%;
+}
+
+.totalprice{
+  padding: 8%;
+  display: flex;
+    justify-content: space-between;
+    align-items: center;
+} 
+
+.right-item {
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+    width: 30%;
+}
+
+.left-item {
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+   width: 60%;
+}
+
+.middle-item {
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+    left: 10%;
+}
+
+.checkout{
+ margin: auto;
+}
+
+.cart_x{
+  background-color: black;
+  color: white;
+  margin-top: 90px;
+  float: right;
+  
+}
+
+h2{
+  margin-top: 20px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  margin: 0 5px;
+}
+
+.colors {
+  display: flex;
+  margin: 1rem 0;
+}
+
+.info {
+  padding: 1rem;
+}
+
+.title{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+}
+
+
+
+
+.minusbtn{
+  width:30px;
+    height: 25px;
+    padding: 0;
+    margin: 2px;
+}
+
+.plusbtn {
+  width:30px;
+  height: 25px;
+  padding: 0;
+  margin: 2px;
+}
+/* //Card */
+
+button {
+  width: 80%;
+  border-radius: none;
+  border: none;
+  padding: 1rem;
+  font-size: 1rem;
+  color: black;
+  background-color: white;
+  cursor: pointer;
+}

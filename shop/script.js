@@ -451,7 +451,7 @@ function searchaddcardstoui(searchedarr) {
 
 function ratingstring(rating) {
   let string='';
-  for(let i=0;i<rating;i++)
+  for(let i=1;i<rating;i++)
   {
       string=string+'⭐';
   }
@@ -572,4 +572,24 @@ else {
   document.getElementsByClassName('cart-btn')[0].style.padding='10px';
   document.getElementsByClassName('cart-btn')[0].style.color='black';
 }
+}
+
+// const logoutbtn = document.getElementById('logout');
+// logoutbtn.addEventListener('click',()=>{
+//   localStorage.removeItem('accesstoken');
+//   localStorage.removeItem('curruser');
+//   if(localStorage.getItem('cartelems')) {localStorage.removeItem('cartelems')}
+//   let a=document.createElement('a');
+//   a.href="../index.html"
+//   a.click();
+// })
+
+const logout = function(event){
+  event.preventDefault();
+  localStorage.removeItem('accesstoken');
+  localStorage.removeItem('curruser');
+  if(localStorage.getItem('cartelems')) {localStorage.removeItem('cartelems')}
+  let a=document.createElement('a');
+  a.href="../index.html"
+  a.click();
 }
