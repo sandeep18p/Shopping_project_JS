@@ -74,6 +74,8 @@ main aside {
   overflow-x: auto;
   width: 10.5rem;
   padding-bottom: 20px;
+  /* padding-top: 200px; */
+
 }
 
 #bt_o{
@@ -138,6 +140,7 @@ main-content .filters {
   display: flex;
   margin-top: 1rem;
   gap: 1rem;
+  flex-wrap: wrap;
 }
 
 main-content .filter {
@@ -243,4 +246,32 @@ main-content .items .item .circle {
 .searchcontainer{
   display: flex;
   justify-content: start;
+}
+
+@media screen  and (max-width: 516px) {
+  
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+    top: 0;
+  
+    background-color: black;
+    border-bottom: 1px solid white;
+    padding: 1rem;
+    font-size: 1rem;
+  }
+  
+  nav .brand {
+    font-size: 1rem;
+    font-weight: bold;
+  }
+  
+  nav .nav-items a {
+    margin: 0 1rem;
+  }
 }
